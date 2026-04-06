@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script src="config.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login — Artcolor</title>
@@ -204,7 +205,7 @@
 </div>
 
 <script>
-  const API = 'http://localhost:4000/api';
+  const API = 'window.API_URL/api';
 
   function trocarAba(aba) {
     document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', (i === 0) === (aba === 'login')));

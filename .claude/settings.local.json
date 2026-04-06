@@ -42,7 +42,12 @@
       "Bash(npx skills:*)",
       "Bash(gh auth:*)",
       "Bash(git --version)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i 's|http://localhost:4000|window.API_URL|g' \"$f\")",
+      "Read(//c/Users/augus/OneDrive/Documentos/Claude/Projects/Artcolor/**)",
+      "Bash(sed -i 's|<head>|<head>\\\\n  <script src=\"\"../config.js\"\"></script>|' \"$f\")"
     ]
   }
 }

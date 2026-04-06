@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script src="../config.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produtos — Admin Artcolor</title>
@@ -153,7 +154,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API = 'http://localhost:4000/api';
+const API = 'window.API_URL/api';
 let token, categorias = [], todosProdutos = [], filtroAtivo = 'todos', editandoId = null;
 
 function fmt(v){return parseFloat(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
