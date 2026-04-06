@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produtos — Artcolor Comunicação Visual</title>
+  <meta name="description" content="Encontre os melhores materiais de comunicação visual. Fachadas, neon, adesivos, troféus e muito mais." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFC300;
+      --yellow-dark: #E8A000;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark2: #1A1A1A;
+      --dark3: #222222;
+      --dark4: #2A2A2A;
+      --white: #FFFFFF;
+      --gray: #9CA3AF;
+      --gray-light: #D1D5DB;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILS ─── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .yellow { color: var(--yellow); }
+    .btn-yellow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: var(--black);
+      font-weight: 700; font-size: 14px;
+      padding: 11px 22px; border-radius: 8px;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-yellow:hover { background: var(--yellow-dark); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--white);
+      font-weight: 600; font-size: 14px;
+      padding: 11px 22px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+      text-decoration: none; transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 120px 0 48px;
+      background: linear-gradient(160deg, #0A0A0A 0%, #1a1200 60%, #0A0A0A 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .page-header-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--gray); margin-bottom: 16px;
+    }
+    .breadcrumb a { color: var(--gray); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--yellow); }
+    .breadcrumb span { color: var(--gray); }
+    .page-header h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900; letter-spacing: -1px;
+    }
+    .page-header p { font-size: 15px; color: var(--gray); margin-top: 8px; }
+
+    /* ─── SHOP LAYOUT ─── */
+    .shop-wrapper {
+      padding: 40px 0 80px;
+    }
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar { position: sticky; top: 88px; }
+    .sidebar-block {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .sidebar-block h3 {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* search */
+    .sidebar-search {
+      display: flex; align-items: center;
+      background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; overflow: hidden;
+    }
+    .sidebar-search input {
+      flex: 1; padding: 10px 14px;
+      background: none; border: none; outline: none;
+      color: var(--white); font-size: 13px; font-family: inherit;
+    }
+    .sidebar-search input::placeholder { color: #555; }
+    .sidebar-search button {
+      padding: 10px 14px; background: var(--yellow);
+      border: none; cursor: pointer; color: var(--black);
+    }
+    .sidebar-search button svg { width: 14px; height: 14px; display: block; }
+
+    /* categories */
+    .cat-list { display: flex; flex-direction: column; gap: 4px; }
+    .cat-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 12px; border-radius: 8px; cursor: pointer;
+      font-size: 14px; color: var(--gray-light);
+      transition: background 0.15s, color 0.15s;
+    }
+    .cat-item:hover, .cat-item.active {
+      background: rgba(255,195,0,0.1); color: var(--yellow);
+    }
+    .cat-item.active { font-weight: 600; }
+    .cat-count {
+      font-size: 11px; color: var(--gray);
+      background: var(--dark3); padding: 2px 7px; border-radius: 999px;
+    }
+    .cat-item.active .cat-count { background: rgba(255,195,0,0.2); color: var(--yellow); }
+
+    /* price range */
+    .price-range-vals {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: var(--gray); margin-bottom: 12px;
+    }
+    .price-range-vals span { color: var(--yellow); font-weight: 700; }
+    input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none; height: 4px;
+      background: linear-gradient(to right, var(--yellow) 60%, var(--dark3) 60%);
+      border-radius: 4px; outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--yellow);
+      cursor: pointer; border: 2px solid var(--black);
+    }
+    .price-btn { width: 100%; margin-top: 14px; justify-content: center; }
+
+    /* checkboxes */
+    .check-list { display: flex; flex-direction: column; gap: 10px; }
+    .check-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--gray-light); cursor: pointer;
+    }
+    .check-item input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--yellow);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .check-item:hover { color: var(--white); }
+
+    /* color swatches */
+    .color-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .color-swatch {
+      width: 28px; height: 28px; border-radius: 50%;
+      cursor: pointer; border: 2px solid transparent;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .color-swatch:hover, .color-swatch.active {
+      border-color: var(--white); transform: scale(1.15);
+    }
+
+    /* tags */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 12px; padding: 5px 12px; border-radius: 999px;
+      background: var(--dark3); border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gray-light); cursor: pointer; transition: 0.15s;
+    }
+    .tag:hover { background: rgba(255,195,0,0.1); border-color: var(--yellow); color: var(--yellow); }
+
+    /* ─── MAIN CONTENT ─── */
+    .shop-main {}
+
+    /* toolbar */
+    .shop-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      background: var(--dark2); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 14px 20px;
+      margin-bottom: 24px;
+    }
+    .shop-results { font-size: 13px; color: var(--gray); }
+    .shop-results strong { color: var(--white); }
+    .toolbar-right { display: flex; align-items: center; gap: 12px; }
+    .sort-select {
+      background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); font-size: 13px; font-family: inherit;
+      padding: 8px 14px; border-radius: 8px; outline: none; cursor: pointer;
+    }
+    .sort-select option { background: var(--dark3); }
+    .view-toggle { display: flex; gap: 4px; }
+    .view-btn {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--gray); transition: 0.15s;
+    }
+    .view-btn:hover, .view-btn.active {
+      background: var(--yellow); color: var(--black); border-color: var(--yellow);
+    }
+    .view-btn svg { width: 14px; height: 14px; }
+
+    /* product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .product-grid.list-view {
+      grid-template-columns: 1fr;
+    }
+
+    /* product card */
+    .product-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .product-card:hover {
+      border-color: rgba(255,195,0,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    /* badges */
+    .product-badges {
+      position: absolute; top: 12px; left: 12px;
+      display: flex; flex-direction: column; gap: 6px; z-index: 2;
+    }
+    .badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 3px 10px; border-radius: 999px; text-transform: uppercase;
+    }
+    .badge-new { background: var(--yellow); color: var(--black); }
+    .badge-sale { background: #ef4444; color: #fff; }
+    .badge-destaque { background: #8b5cf6; color: #fff; }
+
+    /* card actions (on hover) */
+    .product-actions {
+      position: absolute; top: 12px; right: 12px;
+      display: flex; flex-direction: column; gap: 6px; z-index: 2;
+      opacity: 0; transform: translateX(8px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .product-card:hover .product-actions { opacity: 1; transform: translateX(0); }
+    .action-btn {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(10,10,10,0.85); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--gray-light);
+      transition: background 0.15s, color 0.15s;
+    }
+    .action-btn:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .action-btn svg { width: 15px; height: 15px; }
+
+    /* product image */
+    .product-img {
+      aspect-ratio: 4/3; overflow: hidden;
+      background: var(--dark3);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-img-placeholder {
+      width: 60px; height: 60px; opacity: 0.2;
+    }
+
+    /* product body */
+    .product-body { padding: 16px 18px 18px; display: flex; flex-direction: column; }
+    .product-category {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 6px;
+    }
+    .product-name {
+      font-size: 14px; font-weight: 700; line-height: 1.4;
+      margin-bottom: 6px; color: var(--white);
+    }
+    .product-name a { color: inherit; text-decoration: none; }
+    .product-name a:hover { color: var(--yellow); }
+    .product-desc {
+      font-size: 12px; color: #666; line-height: 1.5; margin-bottom: 12px;
+      flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .product-price {
+      display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px;
+    }
+    .price-current { font-size: 20px; font-weight: 900; color: var(--yellow); }
+    .price-old { font-size: 13px; color: var(--gray); text-decoration: line-through; }
+    .product-rating {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
+    }
+    .stars { color: var(--yellow); font-size: 12px; }
+    .rating-count { font-size: 11px; color: var(--gray); }
+    .btn-add-cart {
+      width: 100%; padding: 11px; background: var(--yellow);
+      border: none; border-radius: 8px; font-weight: 700; font-size: 13px;
+      cursor: pointer; color: var(--black); transition: background .2s; font-family: inherit;
+    }
+    .btn-add-cart:hover { background: #e6b000; }
+
+    /* list view card */
+    .product-grid.list-view .product-card {
+      display: grid; grid-template-columns: 220px 1fr;
+    }
+    .product-grid.list-view .product-img { aspect-ratio: auto; height: 100%; }
+    .product-grid.list-view .product-body {
+      padding: 24px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .product-grid.list-view .product-name { font-size: 17px; }
+    .product-grid.list-view .product-actions {
+      top: 16px; right: 16px; flex-direction: row;
+    }
+
+    /* ─── ACTIVE FILTERS ─── */
+    .active-filters {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .active-filters-label { font-size: 13px; color: var(--gray); }
+    .filter-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600;
+      background: rgba(255,195,0,0.1); border: 1px solid rgba(255,195,0,0.25);
+      color: var(--yellow); padding: 4px 10px; border-radius: 999px;
+      cursor: pointer;
+    }
+    .filter-tag:hover { background: rgba(255,195,0,0.2); }
+    .filter-tag svg { width: 10px; height: 10px; }
+
+    /* ─── PAGINATION ─── */
+    .pagination {
+      display: flex; justify-content: center; align-items: center;
+      gap: 8px; margin-top: 40px;
+    }
+    .page-btn {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--dark2); border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gray-light); font-size: 14px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: 0.15s; text-decoration: none;
+    }
+    .page-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+    .page-btn.active { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .page-btn.arrow svg { width: 14px; height: 14px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark2);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 60px 0 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-link {
+      width: 38px; height: 38px;
+      background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: var(--gray); text-decoration: none; transition: 0.2s;
+    }
+    .social-link:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .social-link svg { width: 16px; height: 16px; }
+    .footer-col h4 { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+    .footer-col a, .footer-col p {
+      font-size: 13px; color: var(--gray); text-decoration: none;
+      display: block; margin-bottom: 10px; line-height: 1.5;
+    }
+    .footer-col a:hover { color: var(--yellow); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--gray); }
+
+    /* ─── WHATSAPP FLOAT ─── */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 99;
+      display: flex; align-items: center; gap: 10px;
+      background: #25D366; color: var(--white);
+      font-weight: 700; font-size: 14px;
+      padding: 14px 22px; border-radius: 999px;
+      text-decoration: none; box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover { transform: translateY(-2px) scale(1.03); }
+    .whatsapp-float svg { width: 20px; height: 20px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .shop-layout { grid-template-columns: 240px 1fr; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .shop-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; display: none; }
+      .sidebar.open { display: block; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .product-grid.list-view { grid-template-columns: 1fr; }
+      .product-grid.list-view .product-card { grid-template-columns: 140px 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .shop-toolbar { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<div id="site-header"></div>
+<script src="header.js"></script>
+
+<!-- ─── PAGE HEADER ─── -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Início</a>
+      <span>›</span>
+      <span style="color:var(--white)">Produtos</span>
+    </div>
+    <h1>Nossos <span class="yellow">Produtos</span></h1>
+    <p>Materiais de comunicação visual com qualidade premium e entrega rápida</p>
+  </div>
+</div>
+
+<!-- ─── SHOP ─── -->
+<section class="shop-wrapper">
+  <div class="container">
+    <div class="shop-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+
+        <!-- Busca -->
+        <div class="sidebar-block">
+          <h3>Buscar</h3>
+          <div class="sidebar-search">
+            <input type="text" placeholder="Buscar produto..." id="searchInput" />
+            <button>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categorias -->
+        <div class="sidebar-block">
+          <h3>Categorias</h3>
+          <div class="cat-list">
+            <div class="cat-item active" data-category="all">
+              Todos os Produtos
+            </div>
+            <div class="cat-item" data-category="fachadas-acm">
+              Fachadas em ACM
+            </div>
+            <div class="cat-item" data-category="neon-led">
+              Neon LED
+            </div>
+            <div class="cat-item" data-category="envelopamento">
+              Envelopamento
+            </div>
+            <div class="cat-item" data-category="acrilico">
+              Acrílico
+            </div>
+            <div class="cat-item" data-category="impressos">
+              Impressos
+            </div>
+          </div>
+        </div>
+
+        <!-- Faixa de Preço -->
+        <div class="sidebar-block">
+          <h3>Faixa de Preço</h3>
+          <div class="price-range-vals">
+            <span>R$ 0</span>
+            <span id="priceVal">Todos</span>
+          </div>
+          <input type="range" id="priceRange" min="0" max="5000" value="5000" step="100"
+            oninput="(function(el){const pct=((el.value-el.min)/(el.max-el.min))*100;el.style.background='linear-gradient(to right,#FFC300 '+pct+'%,#2a2a2a '+pct+'%)';document.getElementById('priceVal').textContent=el.value>=5000?'Todos':'até R$ '+Number(el.value).toLocaleString('pt-BR')})(this)" />
+          <button class="btn-yellow price-btn" id="btnFiltrarPreco">Filtrar</button>
+        </div>
+
+        <!-- Material -->
+        <div class="sidebar-block">
+          <h3>Material</h3>
+          <div class="check-list" id="materialList">
+            <label class="check-item"><input type="radio" name="material" value="" checked /> Todos</label>
+            <label class="check-item"><input type="radio" name="material" value="acm" /> ACM (Alumínio Composto)</label>
+            <label class="check-item"><input type="radio" name="material" value="acrilico" /> Acrílico</label>
+            <label class="check-item"><input type="radio" name="material" value="led" /> LED / Neon</label>
+            <label class="check-item"><input type="radio" name="material" value="lona" /> Lona / Banner</label>
+            <label class="check-item"><input type="radio" name="material" value="vinil" /> Vinil Adesivo</label>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="sidebar-block">
+          <h3>Tags Populares</h3>
+          <div class="tag-cloud">
+            <span class="tag">Fachada</span>
+            <span class="tag">Neon</span>
+            <span class="tag">LED</span>
+            <span class="tag">Troféu</span>
+            <span class="tag">Acrílico</span>
+            <span class="tag">Banner</span>
+            <span class="tag">Outdoor</span>
+            <span class="tag">Veículo</span>
+            <span class="tag">Evento</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN -->
+      <div class="shop-main">
+
+        <!-- Filtros ativos -->
+        <div class="active-filters" id="activeFilters">
+          <span class="active-filters-label">Filtros:</span>
+          <span class="filter-tag">
+            Todos os Produtos
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </span>
+          <span class="filter-tag">
+            ACM
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </span>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="shop-toolbar">
+          <p class="shop-results">Exibindo <strong>1–12</strong> de <strong>48</strong> produtos</p>
+          <div class="toolbar-right">
+            <select class="sort-select" onchange="sortProducts(this.value)">
+              <option value="relevance">Mais Relevantes</option>
+              <option value="newest">Mais Recentes</option>
+              <option value="price-asc">Menor Preço</option>
+              <option value="price-desc">Maior Preço</option>
+              <option value="rating">Melhor Avaliados</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grade">
+                <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              </button>
+              <button class="view-btn" id="listBtn" onclick="setView('list')" title="Lista">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+          <!-- Carregado via API -->
+          <div id="grid-loading" style="grid-column:1/-1;text-align:center;padding:60px;color:#666">
+            <div style="width:36px;height:36px;border:3px solid #222;border-top-color:#FFC300;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div>
+            <p>Carregando produtos...</p>
+          </div>
+
+          <!-- Card 1 REMOVIDO (estático) -->
+          <div class="product-card" data-cat="fachadas" style="display:none">
+            <div class="product-badges">
+              <span class="badge badge-destaque">Destaque</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              </button>
+              <button class="action-btn" title="Visualização rápida">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <a href="#" class="product-img">🏢</a>
+            <div class="product-body">
+              <p class="product-category">Fachadas em ACM</p>
+              <h3 class="product-name"><a href="#">Fachada ACM com Letras Caixa Iluminadas</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(24 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">Sob consulta</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card" data-cat="neon">
+            <div class="product-badges">
+              <span class="badge badge-new">Novo</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">💡</a>
+            <div class="product-body">
+              <p class="product-category">Neon LED</p>
+              <h3 class="product-name"><a href="#">Letreiro Neon LED Personalizado</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(18 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">A partir de R$ 380</span>
+              </div>
+              <span class="price-pix">💳 À vista no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card" data-cat="envelopamento">
+            <div class="product-badges">
+              <span class="badge badge-sale">Promoção</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">🚗</a>
+            <div class="product-body">
+              <p class="product-category">Envelopamento</p>
+              <h3 class="product-name"><a href="#">Envelopamento Automotivo Completo</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(31 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">A partir de R$ 1.200</span>
+                <span class="price-old">R$ 1.500</span>
+              </div>
+              <span class="price-pix">💳 10% off no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card" data-cat="acrilico">
+            <div class="product-badges"><span class="badge badge-new">Novo</span></div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">✨</a>
+            <div class="product-body">
+              <p class="product-category">Acrílico</p>
+              <h3 class="product-name"><a href="#">Logo em Acrílico Espelhado Dourado</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(14 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">A partir de R$ 280</span>
+              </div>
+              <span class="price-pix">💳 À vista no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card" data-cat="trofeus">
+            <div class="product-badges"><span class="badge badge-destaque">Destaque</span></div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">🏆</a>
+            <div class="product-body">
+              <p class="product-category">Troféus</p>
+              <h3 class="product-name"><a href="#">Troféu Personalizado em Acrílico + PVC</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(42 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">A partir de R$ 95</span>
+              </div>
+              <span class="price-pix">💳 À vista no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card" data-cat="impressos">
+            <div class="product-badges"><span class="badge badge-sale">Promoção</span></div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">🖨️</a>
+            <div class="product-body">
+              <p class="product-category">Impressos</p>
+              <h3 class="product-name"><a href="#">Banner Lona Alta Performance com Verniz</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-count">(27 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">R$ 89,90</span>
+                <span class="price-old">R$ 120,00</span>
+              </div>
+              <span class="price-pix">💳 R$ 80,91 no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card" data-cat="fachadas">
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">🌃</a>
+            <div class="product-body">
+              <p class="product-category">Fachadas em ACM</p>
+              <h3 class="product-name"><a href="#">Placa ACM com Impressão UV Colorida</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(19 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">Sob consulta</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card" data-cat="impressos">
+            <div class="product-badges"><span class="badge badge-new">Novo</span></div>
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">📇</a>
+            <div class="product-body">
+              <p class="product-category">Impressos</p>
+              <h3 class="product-name"><a href="#">Cartão de Visita Verniz Localizado (1000 un)</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(56 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">R$ 79,90</span>
+              </div>
+              <span class="price-pix">💳 R$ 71,91 no Pix</span>
+            </div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="product-card" data-cat="acrilico">
+            <div class="product-actions">
+              <button class="action-btn" title="Favoritar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+              <button class="action-btn" title="Visualização rápida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            </div>
+            <a href="#" class="product-img">🔲</a>
+            <div class="product-body">
+              <p class="product-category">Acrílico</p>
+              <h3 class="product-name"><a href="#">Luminoso em Acrílico com LED Interno</a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-count">(11 avaliações)</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">Sob consulta</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /product-grid -->
+
+        <!-- Paginação -->
+        <div class="pagination">
+          <a href="#" class="page-btn arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </a>
+          <a href="#" class="page-btn active">1</a>
+          <a href="#" class="page-btn">2</a>
+          <a href="#" class="page-btn">3</a>
+          <a href="#" class="page-btn">4</a>
+          <span class="page-btn" style="cursor:default;border:none;background:none;color:var(--gray)">…</span>
+          <a href="#" class="page-btn">8</a>
+          <a href="#" class="page-btn arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+
+      </div><!-- /shop-main -->
+    </div><!-- /shop-layout -->
+  </div><!-- /container -->
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="margin-bottom:16px;display:inline-flex;">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12L12 4L21 12" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5V20H18V9.5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="logo-text"><span class="logo-name">artcolor</span><span class="logo-sub">Comunicação Visual</span></div>
+        </a>
+        <p>Sua marca em evidência sempre. Soluções completas em comunicação visual para Capanema e toda a região Sudoeste do Paraná.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/artcolorcapanema" target="_blank" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://facebook.com/artcolorcapanema" target="_blank" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <a href="#">Fachadas em ACM</a>
+        <a href="#">Neon LED</a>
+        <a href="#">Envelopamento</a>
+        <a href="#">Acrílico</a>
+        <a href="#">Impressos</a>
+        <a href="#">Troféus</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="tel:+5546999297597">(46) 99929-7597</a>
+        <a href="tel:+5546999358269">(46) 99935-8269</a>
+        <a href="mailto:contato@artcolorcv.com.br">contato@artcolorcv.com.br</a>
+      </div>
+      <div class="footer-col">
+        <h4>Localização</h4>
+        <p>Rua Otávio Francisco de Matos, 785</p>
+        <p>Centro — Capanema, PR</p>
+        <p>CEP 85760-000</p>
+        <p style="margin-top:8px;">Seg–Sex: 07h30–12h | 13h30–18h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Artcolor Comunicação Visual. Todos os direitos reservados.</p>
+      <p>Capanema e Sudoeste do Paraná</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5546999297597?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="whatsapp-float">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  Falar no WhatsApp
+</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // view toggle
+  function setView(mode) {
+    const grid = document.getElementById('productGrid');
+    const gridBtn = document.getElementById('gridBtn');
+    const listBtn = document.getElementById('listBtn');
+    if (mode === 'list') {
+      grid.classList.add('list-view');
+      listBtn.classList.add('active');
+      gridBtn.classList.remove('active');
+    } else {
+      grid.classList.remove('list-view');
+      gridBtn.classList.add('active');
+      listBtn.classList.remove('active');
+    }
+  }
+
+  // category filter (static fallback — API version handles via data-category listeners)
+  function filterCat(el, cat) {
+    document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // color swatches toggle
+  document.querySelectorAll('.color-swatch').forEach(sw => {
+    sw.addEventListener('click', () => sw.classList.toggle('active'));
+  });
+
+
+  }
+  function renderCart() {
+    const list = document.getElementById('cartItemsList');
+    const empty = document.getElementById('cartEmpty');
+    const subtotalEl = document.getElementById('cartSubtotal');
+    const countEl = document.getElementById('cartCount');
+    const total = cartItems.reduce((s, i) => s + i.qty, 0);
+    countEl.textContent = total;
+    if (cartItems.length === 0) {
+      empty.style.display = 'flex'; list.innerHTML = '';
+      subtotalEl.textContent = 'R$ 0,00'; return;
+    }
+    empty.style.display = 'none';
+    subtotalEl.textContent = formatBRL(cartItems.reduce((s, i) => s + i.price * i.qty, 0));
+    list.innerHTML = cartItems.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-img">${item.img || '🛍️'}</div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-price">${formatBRL(item.price)}</p>
+          <p class="cart-item-qty">Qtd: ${item.qty}</p>
+        </div>
+        <button class="cart-item-remove" onclick="removeCartItem('${item.id}')" title="Remover">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>`).join('');
+  }
+  function updateCartBadge() {
+    const total = cartItems.reduce((s, i) => s + i.qty, 0);
+    document.querySelectorAll('.cart-badge').forEach(b => b.textContent = total);
+  }
+  updateCartBadge();
+</script>
+
+<!-- ── Script de produtos via API ── -->
+<script>
+(function() {
+  const API = 'http://localhost:4000/api';
+  let paginaAtual = 1;
+  let categoriaAtual = '';
+  let buscaAtual = '';
+  let precoMaxAtual = 0;
+  let materialAtual = '';
+
+  function fmt(v) {
+    return parseFloat(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  const BACKEND = 'http://localhost:4000';
+
+  function imgSrc(path) {
+    if (!path) return '';
+    return path.startsWith('http') ? path : BACKEND + path;
+  }
+
+  function renderCard(p) {
+    const preco = p.preco_promocional || p.preco;
+    const temPromo = !!p.preco_promocional;
+    const badge = p.destaque
+      ? '<span class="badge badge-destaque">Destaque</span>'
+      : temPromo ? '<span class="badge badge-sale">Promoção</span>' : '';
+    const src = imgSrc(p.imagem_principal);
+    const pData = encodeURIComponent(JSON.stringify({id:p.id,nome:p.nome,preco:preco,imagem:src,slug:p.slug}));
+
+    return `
+      <div class="product-card" data-cat="${p.categoria_slug || ''}">
+        ${badge ? `<div class="product-badges">${badge}</div>` : ''}
+        <a href="produto.html?slug=${p.slug}" class="product-img">
+          ${src
+            ? `<img src="${src}" alt="${p.nome}">`
+            : `<svg class="product-img-placeholder" fill="none" stroke="#555" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`}
+        </a>
+        <div class="product-body">
+          <p class="product-category">${p.categoria_nome || ''}</p>
+          <h3 class="product-name"><a href="produto.html?slug=${p.slug}">${p.nome}</a></h3>
+          <p class="product-desc">${p.descricao_curta || ''}</p>
+          <div class="product-price">
+            <span class="price-current">${fmt(preco)}</span>
+            ${temPromo ? `<span class="price-old">${fmt(p.preco)}</span>` : ''}
+          </div>
+          <button class="btn-add-cart" onclick="adicionarAoCarrinho(decodeURIComponent('${pData}'))">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>`;
+  }
+
+  function renderPaginacao(pag) {
+    const el = document.querySelector('.pagination');
+    if (!el || pag.totalPaginas <= 1) { if(el) el.style.display='none'; return; }
+    el.style.display = 'flex';
+    let html = '';
+    if (pag.pagina > 1) html += `<a href="#" class="page-btn arrow" onclick="irPagina(${pag.pagina-1});return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></a>`;
+    for (let i = 1; i <= pag.totalPaginas; i++) {
+      html += `<a href="#" class="page-btn ${i===pag.pagina?'active':''}" onclick="irPagina(${i});return false">${i}</a>`;
+    }
+    if (pag.pagina < pag.totalPaginas) html += `<a href="#" class="page-btn arrow" onclick="irPagina(${pag.pagina+1});return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>`;
+    el.innerHTML = html;
+  }
+
+  async function carregarProdutos() {
+    const grid = document.getElementById('productGrid');
+    // Esconder cards estáticos
+    grid.querySelectorAll('.product-card').forEach(c => c.style.display = 'none');
+    const loading = document.getElementById('grid-loading');
+    if (loading) loading.style.display = 'block';
+
+    const params = new URLSearchParams({ pagina: paginaAtual, limite: 9 });
+    if (categoriaAtual) params.set('categoria', categoriaAtual);
+    if (buscaAtual) params.set('busca', buscaAtual);
+    if (materialAtual) params.set('material', materialAtual);
+    if (precoMaxAtual > 0) params.set('precoMax', precoMaxAtual);
+
+    try {
+      const r = await fetch(`${API}/produtos?${params}`);
+      const data = await r.json();
+      if (loading) loading.style.display = 'none';
+
+      // Remover cards anteriores da API
+      grid.querySelectorAll('.api-card').forEach(c => c.remove());
+
+      if (!data.produtos.length) {
+        const empty = document.createElement('div');
+        empty.className = 'api-card';
+        empty.style.cssText = 'grid-column:1/-1;text-align:center;padding:60px;color:#666';
+        empty.innerHTML = '<p>Nenhum produto encontrado.</p>';
+        grid.appendChild(empty);
+      } else {
+        data.produtos.forEach(p => {
+          const el = document.createElement('div');
+          el.className = 'api-card';
+          el.innerHTML = renderCard(p);
+          grid.appendChild(el);
+        });
+      }
+
+      // Contador de resultados
+      const contador = document.querySelector('.results-count, [class*="results"]');
+      if (contador) contador.textContent = `${data.paginacao.total} produto(s) encontrado(s)`;
+
+      renderPaginacao(data.paginacao);
+    } catch(e) {
+      if (loading) loading.innerHTML = '<p style="color:#ff6b6b">Servidor offline. <br>Inicie o backend com <code>npm run dev</code> na pasta <code>backend/</code>.</p>';
+      console.error('[Artcolor API]', e);
+    }
+  }
+
+  window.irPagina = function(p) {
+    paginaAtual = p;
+    carregarProdutos();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.adicionarAoCarrinho = function(produto) {
+    if (typeof produto === 'string') produto = JSON.parse(produto);
+    const carrinho = JSON.parse(localStorage.getItem('artcolor_cart') || '[]');
+    const idx = carrinho.findIndex(i => i.id === produto.id);
+    if (idx >= 0) {
+      carrinho[idx].quantidade = (carrinho[idx].quantidade || 1) + 1;
+    } else {
+      carrinho.push({ id: produto.id, nome: produto.nome, preco: produto.preco, imagem: produto.imagem, quantidade: 1, slug: produto.slug });
+    }
+    localStorage.setItem('artcolor_cart', JSON.stringify(carrinho));
+    if (typeof window.updateCartBadge === 'function') window.updateCartBadge();
+
+    // Toast feedback
+    const t = document.createElement('div');
+    t.textContent = '✓ Adicionado ao carrinho!';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:9999;border:1px solid #2a2a2a;animation:fadeIn .2s ease';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2200);
+  };
+
+  // Filtros de categoria
+  document.querySelectorAll('[data-category]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-category]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      categoriaAtual = this.dataset.category === 'all' ? '' : this.dataset.category;
+      paginaAtual = 1;
+      carregarProdutos();
+    });
+  });
+
+  // Campo de busca
+  const searchInput = document.querySelector('#searchInput, .search-input, input[type="search"], input[placeholder*="Buscar"], input[placeholder*="busca"]');
+  if (searchInput) {
+    let debounce;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
+        buscaAtual = this.value.trim();
+        paginaAtual = 1;
+        carregarProdutos();
+      }, 400);
+    });
+  }
+
+  // Filtro de preço
+  const btnPreco = document.getElementById('btnFiltrarPreco');
+  const priceRange = document.getElementById('priceRange');
+  if (priceRange) {
+    const pct = ((priceRange.value - priceRange.min) / (priceRange.max - priceRange.min)) * 100;
+    priceRange.style.background = `linear-gradient(to right,#FFC300 ${pct}%,#2a2a2a ${pct}%)`;
+  }
+  if (btnPreco && priceRange) {
+    btnPreco.addEventListener('click', () => {
+      const val = parseInt(priceRange.value);
+      precoMaxAtual = val >= 5000 ? 0 : val;
+      paginaAtual = 1;
+      carregarProdutos();
+    });
+  }
+
+  // Filtro de material
+  document.querySelectorAll('input[name="material"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      materialAtual = this.value;
+      paginaAtual = 1;
+      carregarProdutos();
+    });
+  });
+
+  // Carregar ao iniciar
+  carregarProdutos();
+})();
+</script>
+
+</body>
+</html>

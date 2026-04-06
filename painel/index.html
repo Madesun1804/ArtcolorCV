@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Painel — Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+
+<div class="painel-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">Art<span>color</span></div>
+
+    <div class="sidebar-secao">Menu</div>
+    <a href="index.html" class="nav-item active">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="pedidos.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      Meus Pedidos
+    </a>
+    <a href="perfil.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Meu Perfil
+    </a>
+    <a href="../produtos.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Loja
+    </a>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="avatar-inicial">?</div>
+        <div>
+          <div class="user-nome" id="user-nome">Carregando...</div>
+          <div class="user-tipo">Cliente</div>
+        </div>
+      </div>
+      <button class="btn-sair" onclick="sair()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair
+      </button>
+    </div>
+  </aside>
+
+  <!-- Conteúdo -->
+  <main class="main-content">
+    <div class="page-header">
+      <button class="btn-menu" id="btn-menu" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="page-header-text">
+        <h1>Olá, <span id="saudacao">...</span>!</h1>
+        <p>Bem-vindo ao seu painel de cliente Artcolor.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total de Pedidos</div>
+        <div class="stat-valor" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Em Produção</div>
+        <div class="stat-valor amarelo" id="stat-producao">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Entregues</div>
+        <div class="stat-valor" id="stat-entregues">—</div>
+      </div>
+    </div>
+
+    <!-- Pedidos recentes -->
+    <div class="tabela-card">
+      <div class="tabela-header">
+        <div class="tabela-titulo">Pedidos Recentes</div>
+        <a href="pedidos.html" style="color:#FFC300;font-size:.8rem;text-decoration:none">Ver todos</a>
+      </div>
+      <div id="lista-pedidos-recentes">
+        <div class="empty">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+          <p>Nenhum pedido ainda</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atalhos -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px">
+      <a href="../produtos.html" style="text-decoration:none">
+        <div class="stat-card" style="cursor:pointer;transition:border-color .2s;border-color:#2a2a2a" onmouseover="this.style.borderColor='#FFC300'" onmouseout="this.style.borderColor='#1e1e1e'">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;background:#1a1500;border-radius:8px;display:flex;align-items:center;justify-content:center">
+              <svg width="20" height="20" fill="none" stroke="#FFC300" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:.9rem">Fazer um pedido</div>
+              <div style="color:#666;font-size:.8rem">Ver nossos produtos</div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="perfil.html" style="text-decoration:none">
+        <div class="stat-card" style="cursor:pointer;transition:border-color .2s;border-color:#2a2a2a" onmouseover="this.style.borderColor='#FFC300'" onmouseout="this.style.borderColor='#1e1e1e'">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:40px;height:40px;background:#1a1500;border-radius:8px;display:flex;align-items:center;justify-content:center">
+              <svg width="20" height="20" fill="none" stroke="#FFC300" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:.9rem">Meu perfil</div>
+              <div style="color:#666;font-size:.8rem">Editar dados e senha</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API = 'http://localhost:4000/api';
+
+  function statusBadge(s) {
+    const map = {
+      aguardando_pagamento: ['badge-aguardando', 'Aguardando Pagamento'],
+      pago:       ['badge-pago',      'Pago'],
+      em_producao:['badge-producao',  'Em Produção'],
+      enviado:    ['badge-enviado',   'Enviado'],
+      entregue:   ['badge-entregue',  'Entregue'],
+      cancelado:  ['badge-cancelado', 'Cancelado']
+    };
+    const [cls, label] = map[s] || ['badge-aguardando', s];
+    return `<span class="badge ${cls}">${label}</span>`;
+  }
+
+  function formatarMoeda(v) {
+    return parseFloat(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  function formatarData(d) {
+    return new Date(d).toLocaleDateString('pt-BR');
+  }
+
+  async function carregar() {
+    const token = localStorage.getItem('artcolor_token');
+    if (!token) { window.location.href = '../login.html'; return; }
+
+    const usuario = JSON.parse(localStorage.getItem('artcolor_usuario') || '{}');
+    document.getElementById('user-nome').textContent = usuario.nome || '';
+    document.getElementById('saudacao').textContent = (usuario.nome || '').split(' ')[0];
+    document.getElementById('avatar-inicial').textContent = (usuario.nome || '?')[0].toUpperCase();
+
+    if (usuario.tipo === 'admin') {
+      window.location.href = '../admin/index.html';
+      return;
+    }
+
+    try {
+      const r = await fetch(`${API}/pedidos/meus`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (r.status === 401) { sair(); return; }
+      const pedidos = await r.json();
+
+      document.getElementById('stat-total').textContent = pedidos.length;
+      document.getElementById('stat-producao').textContent = pedidos.filter(p => p.status === 'em_producao').length;
+      document.getElementById('stat-entregues').textContent = pedidos.filter(p => p.status === 'entregue').length;
+
+      const container = document.getElementById('lista-pedidos-recentes');
+      if (!pedidos.length) return;
+
+      const recentes = pedidos.slice(0, 5);
+      container.innerHTML = `
+        <table>
+          <thead><tr>
+            <th>Pedido</th><th>Data</th><th>Total</th><th>Status</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${recentes.map(p => `
+              <tr>
+                <td style="font-weight:600;color:#fff">${p.numero}</td>
+                <td>${formatarData(p.criado_em)}</td>
+                <td style="color:#FFC300;font-weight:600">${formatarMoeda(p.total)}</td>
+                <td>${statusBadge(p.status)}</td>
+                <td><a href="pedidos.html" style="color:#FFC300;font-size:.8rem;text-decoration:none">Ver</a></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function sair() {
+    localStorage.removeItem('artcolor_token');
+    localStorage.removeItem('artcolor_usuario');
+    window.location.href = '../login.html';
+  }
+
+  carregar();
+
+  // Mobile sidebar toggle
+  (function(){
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+    const sidebar = document.querySelector('.sidebar');
+    const btnMenu = document.getElementById('btn-menu');
+    function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+    function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+    if (btnMenu) btnMenu.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+  })();
+</script>
+</body>
+</html>

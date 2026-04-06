@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto — Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+
+    /* Header placeholder — preenchido pelo header.js */
+    #header-placeholder { min-height: 72px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 20px 0;
+      font-size: .8rem;
+      color: #555;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .breadcrumb a { color: #555; text-decoration: none; }
+    .breadcrumb a:hover { color: #FFC300; }
+    .breadcrumb span { margin: 0 8px; }
+
+    /* Layout principal */
+    .produto-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding: 48px 0;
+    }
+
+    /* Galeria */
+    .galeria-principal {
+      background: #111;
+      border-radius: 16px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid #1e1e1e;
+    }
+    .galeria-principal img { width: 100%; height: 100%; object-fit: cover; }
+    .galeria-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 16px; color: #333;
+    }
+    .galeria-placeholder svg { width: 64px; height: 64px; }
+
+    /* Info do produto */
+    .produto-info { display: flex; flex-direction: column; gap: 24px; }
+
+    .produto-categoria {
+      font-size: .75rem; font-weight: 700; color: #FFC300;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    .produto-nome { font-size: 2rem; font-weight: 800; line-height: 1.2; }
+
+    .avaliacao-resumo { display: flex; align-items: center; gap: 10px; }
+    .estrelas { color: #FFC300; font-size: 1rem; letter-spacing: 2px; }
+    .avaliacao-resumo span { color: #666; font-size: .875rem; }
+
+    .produto-preco { display: flex; align-items: flex-end; gap: 12px; }
+    .preco-atual { font-size: 2.2rem; font-weight: 800; color: #FFC300; }
+    .preco-original { font-size: 1.1rem; color: #555; text-decoration: line-through; }
+    .badge-desconto {
+      background: #2a1f00; color: #FFC300; font-size: .75rem; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px; border: 1px solid #3a2f00;
+    }
+
+    .produto-descricao { color: #aaa; line-height: 1.7; font-size: .95rem; }
+
+    .divider-line { border: none; border-top: 1px solid #1e1e1e; }
+
+    /* Quantidade */
+    .qtd-label { font-size: .8rem; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .qtd-controle { display: flex; align-items: center; gap: 0; }
+    .qtd-btn {
+      width: 44px; height: 44px; background: #1a1a1a; border: 1px solid #2a2a2a;
+      color: #fff; font-size: 1.2rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: background .2s;
+    }
+    .qtd-btn:first-child { border-radius: 8px 0 0 8px; }
+    .qtd-btn:last-child { border-radius: 0 8px 8px 0; }
+    .qtd-btn:hover { background: #252525; }
+    .qtd-num {
+      width: 60px; height: 44px; background: #111; border: 1px solid #2a2a2a;
+      border-left: none; border-right: none; color: #fff; text-align: center;
+      font-size: 1rem; font-weight: 600; font-family: inherit; outline: none;
+    }
+
+    /* Botões de ação */
+    .acoes { display: flex; gap: 12px; }
+    .btn-carrinho {
+      flex: 1; padding: 16px 24px; border-radius: 12px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      border: 2px solid #FFC300; background: transparent; color: #FFC300;
+      transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-carrinho:hover { background: #FFC30020; }
+    .btn-comprar {
+      flex: 1; padding: 16px 24px; border-radius: 12px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      border: none; background: #FFC300; color: #000;
+      transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-comprar:hover { background: #e6b000; }
+
+    /* Info extras */
+    .info-extras { display: flex; flex-direction: column; gap: 12px; }
+    .info-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px; background: #111; border-radius: 10px;
+      border: 1px solid #1e1e1e; font-size: .875rem; color: #ccc;
+    }
+    .info-item svg { color: #FFC300; flex-shrink: 0; }
+
+    /* Seção de avaliações */
+    .secao { padding: 48px 0; border-top: 1px solid #1a1a1a; }
+    .secao-titulo { font-size: 1.4rem; font-weight: 700; margin-bottom: 32px; }
+
+    .avaliacoes-grid { display: flex; flex-direction: column; gap: 16px; }
+    .avaliacao-card {
+      background: #111; border-radius: 12px; padding: 20px;
+      border: 1px solid #1e1e1e;
+    }
+    .av-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .av-autor { font-weight: 600; font-size: .9rem; }
+    .av-data { color: #555; font-size: .8rem; }
+    .av-titulo { font-weight: 600; margin-bottom: 6px; }
+    .av-texto { color: #aaa; font-size: .875rem; line-height: 1.6; }
+    .av-sem { color: #555; text-align: center; padding: 32px; }
+
+    /* Produtos relacionados */
+    .relacionados-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+    }
+    .card-mini {
+      background: #111; border-radius: 12px; overflow: hidden;
+      border: 1px solid #1e1e1e; cursor: pointer; transition: border-color .2s;
+      text-decoration: none; color: inherit;
+    }
+    .card-mini:hover { border-color: #FFC300; }
+    .card-mini-img { aspect-ratio: 1; background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
+    .card-mini-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-mini-info { padding: 12px; }
+    .card-mini-nome { font-size: .85rem; font-weight: 600; margin-bottom: 4px; }
+    .card-mini-preco { font-size: .9rem; font-weight: 700; color: #FFC300; }
+
+    /* Loading */
+    .loading { display: flex; align-items: center; justify-content: center; padding: 80px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #222; border-top-color: #FFC300; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .erro-msg { text-align: center; padding: 80px; color: #666; }
+    .erro-msg h2 { font-size: 1.5rem; margin-bottom: 12px; color: #fff; }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      background: #1a1a1a; border: 1px solid #2a2a2a; color: #fff;
+      padding: 14px 20px; border-radius: 12px; font-size: .875rem;
+      transform: translateY(100px); opacity: 0; transition: all .3s;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.sucesso { border-color: #2a4a2a; }
+
+    @media (max-width: 768px) {
+      .produto-layout { grid-template-columns: 1fr; gap: 32px; }
+      .produto-nome { font-size: 1.5rem; }
+      .preco-atual { font-size: 1.8rem; }
+      .relacionados-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="index.html">Início</a>
+    <span>›</span>
+    <a href="produtos.html">Produtos</a>
+    <span>›</span>
+    <span id="breadcrumb-nome">Carregando...</span>
+  </div>
+</div>
+
+<!-- Conteúdo do produto -->
+<div id="conteudo-produto">
+  <div class="loading"><div class="spinner"></div></div>
+</div>
+
+<!-- Template do produto (preenchido via JS) -->
+<template id="tpl-produto">
+  <div class="container">
+    <div class="produto-layout">
+      <!-- Galeria -->
+      <div class="galeria-principal" id="galeria">
+        <div class="galeria-placeholder">
+          <svg fill="none" stroke="#333" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Imagem do produto</span>
+        </div>
+      </div>
+
+      <!-- Informações -->
+      <div class="produto-info">
+        <div class="produto-categoria" id="prod-categoria"></div>
+        <h1 class="produto-nome" id="prod-nome"></h1>
+        <div class="avaliacao-resumo" id="prod-avaliacao"></div>
+        <div class="produto-preco" id="prod-preco"></div>
+        <p class="produto-descricao" id="prod-descricao"></p>
+        <hr class="divider-line">
+
+        <!-- Quantidade -->
+        <div>
+          <div class="qtd-label">Quantidade</div>
+          <div class="qtd-controle">
+            <button class="qtd-btn" onclick="alterarQtd(-1)">−</button>
+            <input class="qtd-num" type="number" id="quantidade" value="1" min="1">
+            <button class="qtd-btn" onclick="alterarQtd(1)">+</button>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="acoes">
+          <button class="btn-carrinho" onclick="adicionarCarrinho()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Adicionar ao carrinho
+          </button>
+          <button class="btn-comprar" onclick="comprarAgora()">
+            Comprar agora
+          </button>
+        </div>
+
+        <!-- Info extras -->
+        <div class="info-extras">
+          <div class="info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Frete grátis em pedidos acima de R$ 500
+          </div>
+          <div class="info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Produto com garantia de qualidade
+          </div>
+          <div class="info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Dúvidas? Fale no WhatsApp
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Avaliações -->
+  <div class="container">
+    <div class="secao">
+      <h2 class="secao-titulo">Avaliações dos clientes</h2>
+      <div class="avaliacoes-grid" id="lista-avaliacoes"></div>
+    </div>
+
+    <!-- Relacionados -->
+    <div class="secao" id="secao-relacionados" style="display:none">
+      <h2 class="secao-titulo">Você também pode gostar</h2>
+      <div class="relacionados-grid" id="lista-relacionados"></div>
+    </div>
+  </div>
+</template>
+
+<div class="toast" id="toast"></div>
+
+<script src="header.js"></script>
+<script>
+  const API = 'http://localhost:4000/api';
+  let produtoAtual = null;
+
+  function estrelas(nota) {
+    if (!nota) return '';
+    const cheias = Math.round(nota);
+    return '★'.repeat(cheias) + '☆'.repeat(5 - cheias);
+  }
+
+  function formatarMoeda(v) {
+    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  function formatarData(d) {
+    return new Date(d).toLocaleDateString('pt-BR');
+  }
+
+  async function carregarProduto() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    if (!slug) {
+      mostrarErro('Produto não especificado.');
+      return;
+    }
+
+    try {
+      const r = await fetch(`${API}/produtos/${slug}`);
+      if (!r.ok) throw new Error();
+      const produto = await r.json();
+      produtoAtual = produto;
+      renderizarProduto(produto);
+      carregarRelacionados(produto.categoria_slug);
+    } catch {
+      mostrarErro('Produto não encontrado.');
+    }
+  }
+
+  function renderizarProduto(p) {
+    document.title = `${p.nome} — Artcolor`;
+    document.getElementById('breadcrumb-nome').textContent = p.nome;
+
+    const tpl = document.getElementById('tpl-produto');
+    document.getElementById('conteudo-produto').innerHTML = '';
+    document.getElementById('conteudo-produto').appendChild(tpl.content.cloneNode(true));
+
+    document.getElementById('prod-categoria').textContent = p.categoria_nome || '';
+    document.getElementById('prod-nome').textContent = p.nome;
+
+    // Preço
+    const precoEl = document.getElementById('prod-preco');
+    const precoExib = p.preco_promocional || p.preco;
+    precoEl.innerHTML = `<span class="preco-atual">${formatarMoeda(precoExib)}</span>`;
+    if (p.preco_promocional) {
+      const desc = Math.round((1 - p.preco_promocional / p.preco) * 100);
+      precoEl.innerHTML += `<span class="preco-original">${formatarMoeda(p.preco)}</span>
+        <span class="badge-desconto">-${desc}%</span>`;
+    }
+
+    // Avaliação
+    const avEl = document.getElementById('prod-avaliacao');
+    if (p.media_nota) {
+      avEl.innerHTML = `<span class="estrelas">${estrelas(parseFloat(p.media_nota))}</span>
+        <span>${p.media_nota} (${p.avaliacoes.length} avaliação${p.avaliacoes.length !== 1 ? 'ões' : ''})</span>`;
+    }
+
+    // Descrição
+    document.getElementById('prod-descricao').textContent = p.descricao || p.descricao_curta || '';
+
+    // Galeria
+    if (p.imagem_principal) {
+      document.getElementById('galeria').innerHTML = `<img src="${p.imagem_principal}" alt="${p.nome}">`;
+    }
+
+    // Avaliações
+    const listaAv = document.getElementById('lista-avaliacoes');
+    if (p.avaliacoes && p.avaliacoes.length) {
+      listaAv.innerHTML = p.avaliacoes.map(a => `
+        <div class="avaliacao-card">
+          <div class="av-header">
+            <div>
+              <div class="av-autor">${a.usuario_nome}</div>
+              <span class="estrelas" style="font-size:.85rem">${estrelas(a.nota)}</span>
+            </div>
+            <div class="av-data">${formatarData(a.criado_em)}</div>
+          </div>
+          ${a.titulo ? `<div class="av-titulo">${a.titulo}</div>` : ''}
+          <div class="av-texto">${a.texto || ''}</div>
+        </div>
+      `).join('');
+    } else {
+      listaAv.innerHTML = '<div class="av-sem">Nenhuma avaliação ainda. Seja o primeiro!</div>';
+    }
+
+    // Estoque
+    const qtdInput = document.getElementById('quantidade');
+    if (qtdInput) qtdInput.max = p.estoque || 99;
+  }
+
+  async function carregarRelacionados(categoriaSlug) {
+    if (!categoriaSlug) return;
+    try {
+      const r = await fetch(`${API}/produtos?categoria=${categoriaSlug}&limite=4`);
+      const data = await r.json();
+      const outros = data.produtos.filter(p => p.slug !== produtoAtual.slug);
+      if (!outros.length) return;
+
+      const secao = document.getElementById('secao-relacionados');
+      const grid = document.getElementById('lista-relacionados');
+      if (!secao || !grid) return;
+      secao.style.display = 'block';
+      grid.innerHTML = outros.map(p => `
+        <a href="produto.html?slug=${p.slug}" class="card-mini">
+          <div class="card-mini-img">
+            ${p.imagem_principal
+              ? `<img src="${p.imagem_principal}" alt="${p.nome}">`
+              : `<svg width="40" height="40" fill="none" stroke="#333" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`}
+          </div>
+          <div class="card-mini-info">
+            <div class="card-mini-nome">${p.nome}</div>
+            <div class="card-mini-preco">${formatarMoeda(p.preco_promocional || p.preco)}</div>
+          </div>
+        </a>
+      `).join('');
+    } catch {}
+  }
+
+  function mostrarErro(msg) {
+    document.getElementById('conteudo-produto').innerHTML = `
+      <div class="container">
+        <div class="erro-msg">
+          <h2>${msg}</h2>
+          <p>Volte para a <a href="produtos.html" style="color:#FFC300">lista de produtos</a>.</p>
+        </div>
+      </div>`;
+  }
+
+  function alterarQtd(delta) {
+    const el = document.getElementById('quantidade');
+    if (!el) return;
+    const novo = Math.max(1, Math.min(parseInt(el.max) || 99, (parseInt(el.value) || 1) + delta));
+    el.value = novo;
+  }
+
+  function mostrarToast(msg, tipo = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${tipo} show`;
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function adicionarCarrinho() {
+    if (!produtoAtual) return;
+    const qtd = parseInt(document.getElementById('quantidade').value) || 1;
+    const carrinho = JSON.parse(localStorage.getItem('artcolor_cart') || '[]');
+    const idx = carrinho.findIndex(i => i.id === produtoAtual.id);
+    if (idx >= 0) {
+      carrinho[idx].quantidade += qtd;
+    } else {
+      carrinho.push({
+        id: produtoAtual.id,
+        nome: produtoAtual.nome,
+        preco: produtoAtual.preco_promocional || produtoAtual.preco,
+        imagem: produtoAtual.imagem_principal,
+        quantidade: qtd,
+        slug: produtoAtual.slug
+      });
+    }
+    localStorage.setItem('artcolor_cart', JSON.stringify(carrinho));
+    if (typeof atualizarContadorCarrinho === 'function') atualizarContadorCarrinho();
+    mostrarToast('Produto adicionado ao carrinho!', 'sucesso');
+  }
+
+  function comprarAgora() {
+    adicionarCarrinho();
+    setTimeout(() => window.location.href = 'checkout.html', 300);
+  }
+
+  carregarProduto();
+</script>
+</body>
+</html>

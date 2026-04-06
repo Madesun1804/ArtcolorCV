@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos — Admin Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="painel-layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-logo">
+        <div class="logo-mark">A</div>
+        <span class="logo-text">Artcolor</span>
+      </div>
+      <span class="sidebar-tag">Painel Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-secao">Principal</div>
+      <a href="index.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="pedidos.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Pedidos
+      </a>
+      <a href="produtos.html" class="nav-item active">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Produtos
+      </a>
+      <a href="usuarios.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Usuários
+      </a>
+      <div class="nav-secao">Atalhos</div>
+      <a href="../index.html" class="nav-item" target="_blank">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Ver Site
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="avatar">A</div>
+        <div>
+          <div class="user-nome" id="user-nome">Admin</div>
+          <div class="user-tipo">Administrador</div>
+        </div>
+      </div>
+      <button class="btn-sair" onclick="sair()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair da conta
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="btn-menu" id="btn-menu" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <div class="page-title">Produtos</div>
+        <div class="page-desc">Cadastre e gerencie os produtos da loja.</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="abrirModal()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Produto
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-titulo" id="total-label">Produtos</span>
+        <div class="filtros">
+          <button class="filtro-btn active" onclick="filtrarAtivo('todos',this)">Todos</button>
+          <button class="filtro-btn" onclick="filtrarAtivo('ativos',this)">Ativos</button>
+          <button class="filtro-btn" onclick="filtrarAtivo('inativos',this)">Inativos</button>
+        </div>
+      </div>
+      <div id="corpo-tabela">
+        <div class="empty"><div class="empty-icon"><svg width="26" height="26" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><p>Carregando...</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal criar / editar produto -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box" style="max-width:600px">
+    <div class="modal-header">
+      <span class="modal-titulo" id="modal-titulo">Novo Produto</span>
+      <button class="modal-fechar" onclick="fecharModal()">✕</button>
+    </div>
+    <div id="modal-alerta"></div>
+    <form id="form-produto" onsubmit="salvarProduto(event)">
+      <div class="grid-2">
+        <div class="field" style="grid-column:span 2">
+          <label>Nome do produto *</label>
+          <input type="text" id="p-nome" placeholder="Ex: Placa em Acrílico" required>
+        </div>
+        <div class="field">
+          <label>Preço (R$) *</label>
+          <input type="number" id="p-preco" placeholder="0.00" step="0.01" min="0" required>
+        </div>
+        <div class="field">
+          <label>Preço promocional (R$)</label>
+          <input type="number" id="p-promo" placeholder="Deixe vazio se não houver" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label>Categoria</label>
+          <select id="p-categoria">
+            <option value="">Sem categoria</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Estoque (unidades)</label>
+          <input type="number" id="p-estoque" placeholder="0" min="0" value="0">
+        </div>
+        <div class="field" style="grid-column:span 2">
+          <label>Descrição curta</label>
+          <input type="text" id="p-desc-curta" placeholder="Uma linha resumindo o produto">
+        </div>
+        <div class="field" style="grid-column:span 2">
+          <label>Descrição completa</label>
+          <textarea id="p-desc" rows="4" placeholder="Detalhes, materiais, dimensões..."></textarea>
+        </div>
+        <div class="field" style="grid-column:span 2">
+          <label>URL da imagem principal</label>
+          <input type="text" id="p-imagem" placeholder="/uploads/nome-do-arquivo.jpg">
+        </div>
+        <div class="field" style="display:flex;align-items:center;gap:12px;grid-column:span 2">
+          <label class="toggle">
+            <input type="checkbox" id="p-destaque">
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="font-size:.875rem;font-weight:500">Produto em destaque (aparece na home)</span>
+        </div>
+      </div>
+      <hr class="divider">
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="btn-salvar">Salvar produto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'http://localhost:4000/api';
+let token, categorias = [], todosProdutos = [], filtroAtivo = 'todos', editandoId = null;
+
+function fmt(v){return parseFloat(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
+function toast(msg,tipo=''){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${tipo} show`;setTimeout(()=>t.classList.remove('show'),2800);}
+
+function filtrarAtivo(f, btn) {
+  filtroAtivo = f;
+  document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTabela();
+}
+
+function renderTabela() {
+  const lista = todosProdutos.filter(p => {
+    if (filtroAtivo === 'ativos') return p.ativo;
+    if (filtroAtivo === 'inativos') return !p.ativo;
+    return true;
+  });
+  document.getElementById('total-label').textContent = `Produtos (${lista.length})`;
+  const el = document.getElementById('corpo-tabela');
+
+  if (!lista.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon"><svg width="26" height="26" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><p>Nenhum produto encontrado.</p></div>';
+    return;
+  }
+
+  el.innerHTML = `<table>
+    <thead><tr>
+      <th>Produto</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Status</th><th>Destaque</th><th>Ações</th>
+    </tr></thead>
+    <tbody>${lista.map(p=>`<tr>
+      <td>
+        <div style="font-weight:600">${p.nome}</div>
+        <div style="font-size:.75rem;color:var(--text-2)">${p.slug}</div>
+      </td>
+      <td style="color:var(--text-2)">${p.categoria_nome||'—'}</td>
+      <td>
+        <div style="font-weight:600">${fmt(p.preco_promocional||p.preco)}</div>
+        ${p.preco_promocional?`<div style="font-size:.75rem;color:var(--text-3);text-decoration:line-through">${fmt(p.preco)}</div>`:''}
+      </td>
+      <td>
+        <span style="font-weight:600;color:${p.estoque<=3?'#c62828':'var(--text)'}">${p.estoque}</span>
+        ${p.estoque<=3?'<span style="font-size:.7rem;color:#c62828;margin-left:4px">baixo</span>':''}
+      </td>
+      <td><span class="badge ${p.ativo?'badge-ativo':'badge-inativo'}">${p.ativo?'Ativo':'Inativo'}</span></td>
+      <td>${p.destaque?'<span style="color:#b38000;font-size:1rem">★</span>':'<span style="color:var(--text-3)">—</span>'}</td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-secondary btn-sm" onclick="editarProduto(${p.id})">Editar</button>
+          <button class="btn btn-sm ${p.ativo?'btn-danger':'btn-secondary'}" onclick="toggleAtivo(${p.id},${p.ativo})">
+            ${p.ativo?'Desativar':'Ativar'}
+          </button>
+        </div>
+      </td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+async function carregar() {
+  try {
+    const [rP, rC] = await Promise.all([
+      fetch(`${API}/admin/produtos`,{headers:{'Authorization':`Bearer ${token}`}}),
+      fetch(`${API}/admin/categorias`,{headers:{'Authorization':`Bearer ${token}`}})
+    ]);
+    todosProdutos = await rP.json();
+    categorias = await rC.json();
+
+    const sel = document.getElementById('p-categoria');
+    sel.innerHTML = '<option value="">Sem categoria</option>' +
+      categorias.map(c=>`<option value="${c.id}">${c.nome}</option>`).join('');
+
+    renderTabela();
+  } catch(e){console.error(e);}
+}
+
+function abrirModal(id = null) {
+  editandoId = id;
+  document.getElementById('modal-titulo').textContent = id ? 'Editar Produto' : 'Novo Produto';
+  document.getElementById('modal-alerta').innerHTML = '';
+
+  if (!id) {
+    document.getElementById('form-produto').reset();
+  } else {
+    const p = todosProdutos.find(x=>x.id===id);
+    if (!p) return;
+    document.getElementById('p-nome').value = p.nome;
+    document.getElementById('p-preco').value = p.preco;
+    document.getElementById('p-promo').value = p.preco_promocional||'';
+    document.getElementById('p-categoria').value = p.categoria_id||'';
+    document.getElementById('p-estoque').value = p.estoque;
+    document.getElementById('p-desc-curta').value = p.descricao_curta||'';
+    document.getElementById('p-desc').value = p.descricao||'';
+    document.getElementById('p-imagem').value = p.imagem_principal||'';
+    document.getElementById('p-destaque').checked = !!p.destaque;
+  }
+
+  document.getElementById('modal').classList.add('open');
+}
+
+function editarProduto(id){ abrirModal(id); }
+
+async function toggleAtivo(id, ativo) {
+  try {
+    const p = todosProdutos.find(x=>x.id===id);
+    if (!p) return;
+    const r = await fetch(`${API}/admin/produtos/${id}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
+      body: JSON.stringify({...p, ativo: !ativo, tags: JSON.parse(p.tags||'[]')})
+    });
+    if (!r.ok) throw new Error();
+    toast(ativo ? 'Produto desativado.' : 'Produto ativado!', 'ok');
+    carregar();
+  } catch(e){toast('Erro ao atualizar produto.','erro');}
+}
+
+async function salvarProduto(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btn-salvar');
+  btn.disabled = true; btn.textContent = 'Salvando...';
+  document.getElementById('modal-alerta').innerHTML = '';
+
+  const body = {
+    nome: document.getElementById('p-nome').value,
+    preco: document.getElementById('p-preco').value,
+    preco_promocional: document.getElementById('p-promo').value || null,
+    categoria_id: document.getElementById('p-categoria').value || null,
+    estoque: document.getElementById('p-estoque').value,
+    descricao_curta: document.getElementById('p-desc-curta').value,
+    descricao: document.getElementById('p-desc').value,
+    imagem_principal: document.getElementById('p-imagem').value,
+    destaque: document.getElementById('p-destaque').checked,
+    ativo: true,
+    tags: []
+  };
+
+  try {
+    const url = editandoId ? `${API}/admin/produtos/${editandoId}` : `${API}/admin/produtos`;
+    const method = editandoId ? 'PUT' : 'POST';
+    const r = await fetch(url,{method,headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify(body)});
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.erro);
+    fecharModal();
+    toast(editandoId ? 'Produto atualizado!' : 'Produto criado!', 'ok');
+    carregar();
+  } catch(err){
+    document.getElementById('modal-alerta').innerHTML = `<div class="alert alert-erro">${err.message||'Erro ao salvar.'}</div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Salvar produto';
+  }
+}
+
+function fecharModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)fecharModal();});
+function sair(){localStorage.removeItem('artcolor_token');localStorage.removeItem('artcolor_usuario');location.href='../login.html';}
+
+(function init(){
+  token = localStorage.getItem('artcolor_token');
+  if(!token){location.href='../login.html';return;}
+  const u=JSON.parse(localStorage.getItem('artcolor_usuario')||'{}');
+  if(u.tipo!=='admin'){location.href='../painel/index.html';return;}
+  document.getElementById('user-nome').textContent=u.nome||'Admin';
+  document.getElementById('avatar').textContent=(u.nome||'A')[0].toUpperCase();
+  carregar();
+})();
+
+// Mobile sidebar toggle
+(function(){
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
+  document.body.appendChild(overlay);
+  const sidebar = document.querySelector('.sidebar');
+  const btnMenu = document.getElementById('btn-menu');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  if (btnMenu) btnMenu.addEventListener('click', openSidebar);
+  overlay.addEventListener('click', closeSidebar);
+})();
+</script>
+</body>
+</html>

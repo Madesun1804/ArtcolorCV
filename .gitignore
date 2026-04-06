@@ -1,0 +1,39 @@
+# Dependências
+node_modules/
+backend/node_modules/
+
+# Banco de dados (contém dados locais de teste)
+*.db
+*.db-shm
+*.db-wal
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production
+
+# Uploads reais (imagens de produtos)
+backend/uploads/*.jpg
+backend/uploads/*.jpeg
+backend/uploads/*.png
+backend/uploads/*.webp
+backend/uploads/*.gif
+# Mantém os SVG placeholder no repo
+!backend/uploads/*.svg
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Build / cache
+dist/
+.cache/

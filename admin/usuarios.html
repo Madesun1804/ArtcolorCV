@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuários — Admin Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="painel-layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-logo">
+        <div class="logo-mark">A</div>
+        <span class="logo-text">Artcolor</span>
+      </div>
+      <span class="sidebar-tag">Painel Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-secao">Principal</div>
+      <a href="index.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a href="pedidos.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Pedidos
+      </a>
+      <a href="produtos.html" class="nav-item">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Produtos
+      </a>
+      <a href="usuarios.html" class="nav-item active">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Usuários
+      </a>
+      <div class="nav-secao">Atalhos</div>
+      <a href="../index.html" class="nav-item" target="_blank">
+        <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Ver Site
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="avatar">A</div>
+        <div>
+          <div class="user-nome" id="user-nome">Admin</div>
+          <div class="user-tipo">Administrador</div>
+        </div>
+      </div>
+      <button class="btn-sair" onclick="sair()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair da conta
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="btn-menu" id="btn-menu" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <div class="page-title">Usuários</div>
+        <div class="page-desc">Gerencie os clientes e administradores cadastrados.</div>
+      </div>
+    </div>
+
+    <!-- Stats rápidos -->
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
+      <div class="stat-card">
+        <div class="stat-icon roxo" style="width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:#f3e5f5">
+          <svg width="18" height="18" fill="none" stroke="#6a1b9a" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div class="stat-label">Total de Clientes</div>
+        <div class="stat-valor" id="s-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon verde" style="width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:#e8f5e9">
+          <svg width="18" height="18" fill="none" stroke="#2e7d32" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="stat-label">Contas Ativas</div>
+        <div class="stat-valor" id="s-ativos">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amarelo" style="width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px">
+          <svg width="18" height="18" fill="none" stroke="#b38000" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+        </div>
+        <div class="stat-label">Com Pedidos</div>
+        <div class="stat-valor" id="s-compras">—</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-titulo" id="total-label">Usuários</span>
+        <div class="filtros">
+          <button class="filtro-btn active" onclick="filtrar('todos',this)">Todos</button>
+          <button class="filtro-btn" onclick="filtrar('cliente',this)">Clientes</button>
+          <button class="filtro-btn" onclick="filtrar('admin',this)">Admins</button>
+        </div>
+      </div>
+      <div id="corpo-tabela">
+        <div class="empty">
+          <div class="empty-icon">
+            <svg width="26" height="26" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <p>Carregando usuários...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal de detalhe do usuário -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-titulo" id="modal-titulo">Usuário</span>
+      <button class="modal-fechar" onclick="fecharModal()">✕</button>
+    </div>
+    <div id="modal-corpo"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'http://localhost:4000/api';
+let token, todosUsuarios = [], filtroTipo = 'todos';
+
+function fmtD(d){return new Date(d).toLocaleDateString('pt-BR');}
+function toast(msg,tipo=''){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${tipo} show`;setTimeout(()=>t.classList.remove('show'),2800);}
+
+function filtrar(tipo, btn) {
+  filtroTipo = tipo;
+  document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTabela();
+}
+
+function renderTabela() {
+  const lista = todosUsuarios.filter(u => {
+    if (filtroTipo === 'cliente') return u.tipo === 'cliente';
+    if (filtroTipo === 'admin') return u.tipo === 'admin';
+    return true;
+  });
+
+  document.getElementById('total-label').textContent = `Usuários (${lista.length})`;
+  const el = document.getElementById('corpo-tabela');
+
+  if (!lista.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon"><svg width="26" height="26" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><p>Nenhum usuário encontrado.</p></div>';
+    return;
+  }
+
+  el.innerHTML = `<table>
+    <thead><tr>
+      <th>Usuário</th><th>Telefone</th><th>Tipo</th><th>Pedidos</th><th>Cadastro</th><th>Status</th><th>Ações</th>
+    </tr></thead>
+    <tbody>${lista.map(u=>`<tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:32px;height:32px;border-radius:50%;background:${u.tipo==='admin'?'#fff5cc':'#f5f5f7'};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:${u.tipo==='admin'?'#b38000':'#6e6e73'};flex-shrink:0">
+            ${u.nome[0].toUpperCase()}
+          </div>
+          <div>
+            <div style="font-weight:600">${u.nome}</div>
+            <div style="font-size:.75rem;color:var(--text-2)">${u.email}</div>
+          </div>
+        </div>
+      </td>
+      <td style="color:var(--text-2)">${u.telefone||'—'}</td>
+      <td><span class="badge badge-${u.tipo}">${u.tipo==='admin'?'Admin':'Cliente'}</span></td>
+      <td style="font-weight:600">${u.total_pedidos}</td>
+      <td style="color:var(--text-2);font-size:.8rem">${fmtD(u.criado_em)}</td>
+      <td><span class="badge ${u.ativo?'badge-ativo':'badge-inativo'}">${u.ativo?'Ativo':'Inativo'}</span></td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-secondary btn-sm" onclick="verUsuario(${u.id})">Detalhes</button>
+          <button class="btn btn-sm ${u.ativo?'btn-danger':'btn-secondary'}" onclick="toggleAtivo(${u.id},${u.ativo})">
+            ${u.ativo?'Bloquear':'Ativar'}
+          </button>
+        </div>
+      </td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function verUsuario(id) {
+  const u = todosUsuarios.find(x=>x.id===id);
+  if (!u) return;
+  document.getElementById('modal-titulo').textContent = u.nome;
+  document.getElementById('modal-corpo').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">E-mail</div>
+        <div style="font-size:.9rem">${u.email}</div>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">Telefone</div>
+        <div style="font-size:.9rem">${u.telefone||'Não informado'}</div>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">Tipo</div>
+        <span class="badge badge-${u.tipo}">${u.tipo==='admin'?'Administrador':'Cliente'}</span>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">Status</div>
+        <span class="badge ${u.ativo?'badge-ativo':'badge-inativo'}">${u.ativo?'Ativo':'Inativo'}</span>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">Pedidos realizados</div>
+        <div style="font-size:1.4rem;font-weight:800">${u.total_pedidos}</div>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-2);text-transform:uppercase;margin-bottom:4px">Cadastro em</div>
+        <div style="font-size:.9rem">${fmtD(u.criado_em)}</div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-secondary" onclick="fecharModal()">Fechar</button>
+      <button class="btn ${u.ativo?'btn-danger':'btn-primary'}" onclick="toggleAtivo(${u.id},${u.ativo});fecharModal()">
+        ${u.ativo?'Bloquear conta':'Ativar conta'}
+      </button>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+async function toggleAtivo(id, ativo) {
+  try {
+    const r = await fetch(`${API}/admin/usuarios/${id}/ativo`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},
+      body: JSON.stringify({ativo: !ativo})
+    });
+    if(!r.ok) throw new Error();
+    toast(ativo ? 'Usuário bloqueado.' : 'Usuário ativado!', 'ok');
+    carregar();
+  } catch(e){toast('Erro ao atualizar usuário.','erro');}
+}
+
+async function carregar() {
+  try {
+    const r = await fetch(`${API}/admin/usuarios`,{headers:{'Authorization':`Bearer ${token}`}});
+    if(r.status===401||r.status===403){sair();return;}
+    todosUsuarios = await r.json();
+
+    const clientes = todosUsuarios.filter(u=>u.tipo==='cliente');
+    document.getElementById('s-total').textContent = clientes.length;
+    document.getElementById('s-ativos').textContent = clientes.filter(u=>u.ativo).length;
+    document.getElementById('s-compras').textContent = clientes.filter(u=>u.total_pedidos>0).length;
+
+    renderTabela();
+  } catch(e){console.error(e);}
+}
+
+function fecharModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)fecharModal();});
+function sair(){localStorage.removeItem('artcolor_token');localStorage.removeItem('artcolor_usuario');location.href='../login.html';}
+
+(function init(){
+  token = localStorage.getItem('artcolor_token');
+  if(!token){location.href='../login.html';return;}
+  const u=JSON.parse(localStorage.getItem('artcolor_usuario')||'{}');
+  if(u.tipo!=='admin'){location.href='../painel/index.html';return;}
+  document.getElementById('user-nome').textContent=u.nome||'Admin';
+  document.getElementById('avatar').textContent=(u.nome||'A')[0].toUpperCase();
+  carregar();
+})();
+
+// Mobile sidebar toggle
+(function(){
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
+  document.body.appendChild(overlay);
+  const sidebar = document.querySelector('.sidebar');
+  const btnMenu = document.getElementById('btn-menu');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  if (btnMenu) btnMenu.addEventListener('click', openSidebar);
+  overlay.addEventListener('click', closeSidebar);
+})();
+</script>
+</body>
+</html>

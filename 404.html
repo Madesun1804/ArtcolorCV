@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada — Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFC300;
+      --black: #0a0a0a;
+      --dark2: #111;
+      --dark3: #1a1a1a;
+      --white: #ffffff;
+      --gray: #888;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .logo-mark {
+      width: 56px;
+      height: 56px;
+      background: var(--yellow);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 40px;
+    }
+
+    .logo-mark svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .code {
+      font-size: clamp(80px, 20vw, 160px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 0%, #444 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .code span {
+      -webkit-text-fill-color: var(--yellow);
+    }
+
+    h1 {
+      font-size: clamp(18px, 4vw, 26px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--gray);
+      font-size: 15px;
+      max-width: 380px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .15s, transform .15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { opacity: .85; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .btn-secondary {
+      background: #1e1e1e;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .suggestions {
+      margin-top: 64px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 500px;
+    }
+
+    .suggestion-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: #151515;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      color: #aaa;
+      font-size: 13px;
+      text-decoration: none;
+      transition: border-color .15s, color .15s;
+    }
+
+    .suggestion-link:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+      <path d="M2 17l10 5 10-5"/>
+      <path d="M2 12l10 5 10-5"/>
+    </svg>
+  </div>
+
+  <div class="code">4<span>0</span>4</div>
+
+  <h1>Página não encontrada</h1>
+  <p>O endereço que você acessou não existe ou foi movido. Verifique o link e tente novamente.</p>
+
+  <div class="actions">
+    <a href="index.html" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Voltar ao início
+    </a>
+    <a href="produtos.html" class="btn btn-secondary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+      Ver produtos
+    </a>
+  </div>
+
+  <div class="suggestions">
+    <a href="index.html#sobre" class="suggestion-link">Sobre nós</a>
+    <a href="index.html#servicos" class="suggestion-link">Serviços</a>
+    <a href="produtos.html" class="suggestion-link">Catálogo</a>
+    <a href="index.html#contato" class="suggestion-link">Contato</a>
+    <a href="login.html" class="suggestion-link">Minha conta</a>
+  </div>
+
+</body>
+</html>

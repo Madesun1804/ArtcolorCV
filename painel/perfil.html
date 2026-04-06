@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil — Artcolor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+<div class="painel-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">Art<span>color</span></div>
+    <div class="sidebar-secao">Menu</div>
+    <a href="index.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="pedidos.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+      Meus Pedidos
+    </a>
+    <a href="perfil.html" class="nav-item active">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Meu Perfil
+    </a>
+    <a href="../produtos.html" class="nav-item">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Loja
+    </a>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="avatar-inicial">?</div>
+        <div>
+          <div class="user-nome" id="user-nome">Carregando...</div>
+          <div class="user-tipo">Cliente</div>
+        </div>
+      </div>
+      <button class="btn-sair" onclick="sair()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <button class="btn-menu" id="btn-menu" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="page-header-text">
+        <h1>Meu Perfil</h1>
+        <p>Gerencie seus dados pessoais e senha.</p>
+      </div>
+    </div>
+
+    <!-- Dados pessoais -->
+    <div class="form-card">
+      <div class="form-section-title">Dados Pessoais</div>
+      <div id="alerta-perfil"></div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome">
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="email" disabled style="opacity:.5;cursor:not-allowed">
+        </div>
+        <div class="field">
+          <label>Telefone / WhatsApp</label>
+          <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX">
+        </div>
+        <div class="field">
+          <label>CPF / CNPJ</label>
+          <input type="text" id="cpf_cnpj" placeholder="Opcional">
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:8px">
+        <button class="btn-primary" onclick="salvarPerfil()">Salvar alterações</button>
+      </div>
+    </div>
+
+    <!-- Alterar senha -->
+    <div class="form-card">
+      <div class="form-section-title">Alterar Senha</div>
+      <div id="alerta-senha"></div>
+      <div style="max-width:400px">
+        <div class="field">
+          <label>Senha atual</label>
+          <input type="password" id="senha-atual" placeholder="Sua senha atual">
+        </div>
+        <div class="field">
+          <label>Nova senha</label>
+          <input type="password" id="nova-senha" placeholder="Mínimo 6 caracteres">
+        </div>
+        <div class="field">
+          <label>Confirmar nova senha</label>
+          <input type="password" id="conf-senha" placeholder="Repita a nova senha">
+        </div>
+        <button class="btn-primary" onclick="alterarSenha()">Alterar senha</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API = 'http://localhost:4000/api';
+  let token;
+
+  function mostrarAlerta(id, msg, tipo = 'erro') {
+    const el = document.getElementById(id);
+    el.innerHTML = `<div class="alert alert-${tipo === 'ok' ? 'ok' : 'erro'}" style="margin-bottom:16px">${msg}</div>`;
+  }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  async function carregar() {
+    token = localStorage.getItem('artcolor_token');
+    if (!token) { window.location.href = '../login.html'; return; }
+
+    try {
+      const r = await fetch(`${API}/usuario/perfil`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (r.status === 401) { sair(); return; }
+      const u = await r.json();
+      document.getElementById('user-nome').textContent = u.nome;
+      document.getElementById('avatar-inicial').textContent = u.nome[0].toUpperCase();
+      document.getElementById('nome').value = u.nome || '';
+      document.getElementById('email').value = u.email || '';
+      document.getElementById('telefone').value = u.telefone || '';
+      document.getElementById('cpf_cnpj').value = u.cpf_cnpj || '';
+    } catch (e) { console.error(e); }
+  }
+
+  async function salvarPerfil() {
+    document.getElementById('alerta-perfil').innerHTML = '';
+    try {
+      const r = await fetch(`${API}/usuario/perfil`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({
+          nome: document.getElementById('nome').value,
+          telefone: document.getElementById('telefone').value,
+          cpf_cnpj: document.getElementById('cpf_cnpj').value
+        })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.erro);
+
+      // Atualizar nome no localStorage
+      const u = JSON.parse(localStorage.getItem('artcolor_usuario') || '{}');
+      u.nome = document.getElementById('nome').value;
+      localStorage.setItem('artcolor_usuario', JSON.stringify(u));
+      document.getElementById('user-nome').textContent = u.nome;
+      document.getElementById('avatar-inicial').textContent = u.nome[0].toUpperCase();
+
+      toast('Perfil atualizado com sucesso!');
+    } catch (e) {
+      mostrarAlerta('alerta-perfil', e.message || 'Erro ao salvar.');
+    }
+  }
+
+  async function alterarSenha() {
+    document.getElementById('alerta-senha').innerHTML = '';
+    const atual = document.getElementById('senha-atual').value;
+    const nova = document.getElementById('nova-senha').value;
+    const conf = document.getElementById('conf-senha').value;
+
+    if (!atual || !nova || !conf) { mostrarAlerta('alerta-senha', 'Preencha todos os campos.'); return; }
+    if (nova !== conf) { mostrarAlerta('alerta-senha', 'As senhas não coincidem.'); return; }
+    if (nova.length < 6) { mostrarAlerta('alerta-senha', 'A nova senha deve ter no mínimo 6 caracteres.'); return; }
+
+    try {
+      const r = await fetch(`${API}/usuario/senha`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ senha_atual: atual, nova_senha: nova })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.erro);
+      document.getElementById('senha-atual').value = '';
+      document.getElementById('nova-senha').value = '';
+      document.getElementById('conf-senha').value = '';
+      mostrarAlerta('alerta-senha', 'Senha alterada com sucesso!', 'ok');
+    } catch (e) {
+      mostrarAlerta('alerta-senha', e.message || 'Erro ao alterar senha.');
+    }
+  }
+
+  function sair() {
+    localStorage.removeItem('artcolor_token');
+    localStorage.removeItem('artcolor_usuario');
+    window.location.href = '../login.html';
+  }
+
+  carregar();
+
+  // Mobile sidebar toggle
+  (function(){
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+    const sidebar = document.querySelector('.sidebar');
+    const btnMenu = document.getElementById('btn-menu');
+    function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+    function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+    if (btnMenu) btnMenu.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+  })();
+</script>
+</body>
+</html>
