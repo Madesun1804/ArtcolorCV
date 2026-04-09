@@ -20,6 +20,9 @@ backend/uploads/*.webp
 backend/uploads/*.gif
 # Mantém os SVG placeholder no repo
 !backend/uploads/*.svg
+# Imagens de produtos iniciais (commitadas manualmente)
+!backend/uploads/fachada-acm.png
+!backend/uploads/letreiro-neon-led.jpg
 
 # Logs
 *.log
