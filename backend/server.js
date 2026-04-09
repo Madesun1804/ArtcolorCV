@@ -1,4 +1,10 @@
 require('dotenv').config();
+
+// Fallback para variáveis críticas não injetadas pelo Railway
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'artcolor_jwt_secret_2026_troque_em_producao';
+  console.warn('[AVISO] JWT_SECRET não definido. Usando valor padrão — configure a variável no Railway!');
+}
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
