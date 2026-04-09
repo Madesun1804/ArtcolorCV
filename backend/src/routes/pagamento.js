@@ -1,6 +1,6 @@
 const express = require('express');
 const { getDb } = require('../db/database');
-const { authMiddleware } = require('../middleware/auth');
+const authMiddleware = require('../middleware/auth');
 const { obterOuCriarCliente, criarCobranca, obterPixQrCode, consultarPagamento } = require('../services/asaas');
 const { v4: uuidv4 } = require('uuid');
 
