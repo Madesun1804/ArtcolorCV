@@ -9,9 +9,11 @@
     "seed": "node src/db/seed.js",
     "update-admin": "node src/db/update-admin.js",
     "fix-images": "node src/db/fix-images.js",
-    "add-vendas": "node src/db/add-vendas.js"
+    "add-vendas": "node src/db/add-vendas.js",
+    "migrate": "node src/db/migrate-pagamento.js"
   },
   "dependencies": {
+    "axios": "^1.14.0",
     "bcryptjs": "^2.4.3",
     "better-sqlite3": "^11.0.0",
     "cors": "^2.8.5",
