@@ -154,7 +154,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API = 'window.API_URL/api';
+const API = window.API_URL + '/api';
 let token, categorias = [], todosProdutos = [], filtroAtivo = 'todos', editandoId = null;
 
 function fmt(v){return parseFloat(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}

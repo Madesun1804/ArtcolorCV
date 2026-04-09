@@ -954,7 +954,7 @@
 <!-- ── Script de produtos via API ── -->
 <script>
 (function() {
-  const API = 'window.API_URL/api';
+  const API = window.API_URL + '/api';
   let paginaAtual = 1;
   let categoriaAtual = '';
   let buscaAtual = '';
@@ -965,7 +965,7 @@
     return parseFloat(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  const BACKEND = 'window.API_URL';
+  const BACKEND = window.API_URL;
 
   function imgSrc(path) {
     if (!path) return '';

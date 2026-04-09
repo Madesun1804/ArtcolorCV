@@ -128,7 +128,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API = 'window.API_URL/api';
+const API = window.API_URL + '/api';
 let token, todosUsuarios = [], filtroTipo = 'todos';
 
 function fmtD(d){return new Date(d).toLocaleDateString('pt-BR');}
