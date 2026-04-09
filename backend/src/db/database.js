@@ -42,6 +42,7 @@ function initDb() {
       ativo             INTEGER DEFAULT 1,
       destaque          INTEGER DEFAULT 0,
       tags              TEXT DEFAULT '[]',
+      vendas            INTEGER DEFAULT 0,
       criado_em         TEXT DEFAULT (datetime('now','localtime'))
     );
 
@@ -87,6 +88,12 @@ function initDb() {
       endereco_entrega TEXT,
       metodo_pagamento TEXT,
       observacoes      TEXT,
+      pagamento_id     TEXT,
+      pagamento_status TEXT,
+      pagamento_link   TEXT,
+      frete_servico    TEXT,
+      frete_prazo      TEXT,
+      cep_entrega      TEXT,
       criado_em        TEXT DEFAULT (datetime('now','localtime')),
       atualizado_em    TEXT DEFAULT (datetime('now','localtime'))
     );
@@ -115,6 +122,20 @@ function initDb() {
       criado_em  TEXT DEFAULT (datetime('now','localtime'))
     );
   `);
+
+  // Migrações para colunas adicionadas após criação inicial
+  const migrations = [
+    'ALTER TABLE produtos ADD COLUMN vendas INTEGER DEFAULT 0',
+    'ALTER TABLE pedidos ADD COLUMN pagamento_id TEXT',
+    'ALTER TABLE pedidos ADD COLUMN pagamento_status TEXT',
+    'ALTER TABLE pedidos ADD COLUMN pagamento_link TEXT',
+    'ALTER TABLE pedidos ADD COLUMN frete_servico TEXT',
+    'ALTER TABLE pedidos ADD COLUMN frete_prazo TEXT',
+    'ALTER TABLE pedidos ADD COLUMN cep_entrega TEXT',
+  ];
+  for (const sql of migrations) {
+    try { db.exec(sql); } catch (_) { /* coluna já existe */ }
+  }
 
   console.log('✅ Banco de dados inicializado.');
   seedIfEmpty(db);
