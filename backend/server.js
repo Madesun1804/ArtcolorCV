@@ -7,11 +7,13 @@ const path = require('path');
 
 const { initDb } = require('./src/db/database');
 
-const authRoutes    = require('./src/routes/auth');
+const authRoutes     = require('./src/routes/auth');
 const produtosRoutes = require('./src/routes/produtos');
 const pedidosRoutes  = require('./src/routes/pedidos');
 const usuarioRoutes  = require('./src/routes/usuario');
 const adminRoutes    = require('./src/routes/admin');
+const freteRoutes    = require('./src/routes/frete');
+const pagamentoRoutes = require('./src/routes/pagamento');
 
 const app = express();
 
@@ -25,7 +27,7 @@ app.use(cors({
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'https://madesun1804.github.io',
-    'https://artcolorcv-production.up.railway.app',
+    'https://efficient-curiosity-production-f497.up.railway.app',
   ],
   credentials: true
 }));
@@ -52,11 +54,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ── Rotas da API ───────────────────────────────────────────────────────────────
-app.use('/api/auth',    authRoutes);
-app.use('/api/produtos', produtosRoutes);
-app.use('/api/pedidos',  pedidosRoutes);
-app.use('/api/usuario',  usuarioRoutes);
-app.use('/api/admin',    adminRoutes);
+app.use('/api/auth',      authRoutes);
+app.use('/api/produtos',  produtosRoutes);
+app.use('/api/pedidos',   pedidosRoutes);
+app.use('/api/usuario',   usuarioRoutes);
+app.use('/api/admin',     adminRoutes);
+app.use('/api/frete',     freteRoutes);
+app.use('/api/pagamento', pagamentoRoutes);
 
 // ── Health check ───────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
