@@ -10,7 +10,7 @@ function gerarToken(usuario) {
   return jwt.sign(
     { id: usuario.id, email: usuario.email, nome: usuario.nome, tipo: usuario.tipo },
     process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN }
+    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   );
 }
 
@@ -46,32 +46,42 @@ router.post('/register', (req, res) => {
 
 // POST /api/auth/login
 router.post('/login', (req, res) => {
-  const { email, senha } = req.body;
+  try {
+    const { email, senha } = req.body;
 
-  if (!email || !senha) {
-    return res.status(400).json({ erro: 'E-mail e senha são obrigatórios.' });
+    if (!email || !senha) {
+      return res.status(400).json({ erro: 'E-mail e senha são obrigatórios.' });
+    }
+
+    if (!process.env.JWT_SECRET) {
+      console.error('[AUTH] JWT_SECRET não definido nas variáveis de ambiente!');
+      return res.status(500).json({ erro: 'Configuração do servidor incompleta.' });
+    }
+
+    const db = getDb();
+    const login = email.trim();
+    const usuario = login.includes('@')
+      ? db.prepare('SELECT * FROM usuarios WHERE email = ?').get(login.toLowerCase())
+      : db.prepare('SELECT * FROM usuarios WHERE nome = ? COLLATE NOCASE').get(login);
+
+    if (!usuario || !bcrypt.compareSync(senha, usuario.senha_hash)) {
+      return res.status(401).json({ erro: 'Usuário ou senha incorretos.' });
+    }
+    if (!usuario.ativo) {
+      return res.status(403).json({ erro: 'Conta desativada. Entre em contato com o suporte.' });
+    }
+
+    const token = gerarToken(usuario);
+    console.log(`[AUTH] Login: ${email}`);
+    res.json({
+      mensagem: 'Login realizado com sucesso!',
+      token,
+      usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo }
+    });
+  } catch (e) {
+    console.error('[AUTH] Erro no login:', e.message);
+    res.status(500).json({ erro: 'Erro interno no servidor.' });
   }
-
-  const db = getDb();
-  const login = email.trim();
-  const usuario = login.includes('@')
-    ? db.prepare('SELECT * FROM usuarios WHERE email = ?').get(login.toLowerCase())
-    : db.prepare('SELECT * FROM usuarios WHERE nome = ? COLLATE NOCASE').get(login);
-
-  if (!usuario || !bcrypt.compareSync(senha, usuario.senha_hash)) {
-    return res.status(401).json({ erro: 'Usuário ou senha incorretos.' });
-  }
-  if (!usuario.ativo) {
-    return res.status(403).json({ erro: 'Conta desativada. Entre em contato com o suporte.' });
-  }
-
-  const token = gerarToken(usuario);
-  console.log(`[AUTH] Login: ${email}`);
-  res.json({
-    mensagem: 'Login realizado com sucesso!',
-    token,
-    usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo }
-  });
 });
 
 // GET /api/auth/me
