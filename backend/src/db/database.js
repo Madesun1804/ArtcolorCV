@@ -170,7 +170,7 @@ function seedIfEmpty(db) {
     'Fachada comercial em chapa ACM (Alumínio Composto) com acabamento premium. Ideal para lojas, clínicas e escritórios. Resistente a intempéries, UV e corrosão. Inclui estrutura de fixação e instalação.',
     'Fachada comercial em ACM com acabamento premium e instalação inclusa.',
     850.00, null, 1,
-    '/uploads/fachada-acm.png',
+    'https://madesun1804.github.io/ArtcolorCV/assets/fachada-acm.png',
     10, 1,
     '["fachada","acm","comercial","painel"]'
   );
@@ -181,7 +181,7 @@ function seedIfEmpty(db) {
     'Letreiro personalizado em Neon LED flexível. Escolha a cor, o texto e o tamanho. Baixo consumo de energia, alta durabilidade (50.000h) e efeito visual impactante. Perfeito para fachadas, eventos e decoração.',
     'Letreiro personalizado em Neon LED com alta durabilidade e baixo consumo.',
     1200.00, 980.00, 2,
-    '/uploads/letreiro-neon-led.jpg',
+    'https://madesun1804.github.io/ArtcolorCV/assets/letreiro-neon-led.jpg',
     8, 1,
     '["neon","led","luminoso","letreiro","personalizado"]'
   );
