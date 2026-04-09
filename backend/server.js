@@ -72,8 +72,10 @@ app.get('/api/debug-env', (req, res) => {
   res.json({
     JWT_SECRET_set: !!process.env.JWT_SECRET,
     JWT_SECRET_len: process.env.JWT_SECRET?.length || 0,
+    TEST_VAR: process.env.TEST_VAR || 'nao_definida',
     NODE_ENV: process.env.NODE_ENV,
     PORT: process.env.PORT,
+    total_env_keys: Object.keys(process.env).length,
   });
 });
 
