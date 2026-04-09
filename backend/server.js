@@ -24,7 +24,10 @@ const pagamentoRoutes = require('./src/routes/pagamento');
 const app = express();
 
 // ── Segurança básica ──────────────────────────────────────────────────────────
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}));
 
 app.use(cors({
   origin: [
