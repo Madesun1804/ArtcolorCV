@@ -231,14 +231,17 @@
     /* (mockup styles removed — card now shows ipad.jpg) */
 
     @media (max-width: 768px) {
-      #inicio { min-height: 100rem; padding: 120px 16px 0; }
+      #inicio { min-height: 0; padding: 120px 16px 60px; flex-direction: column; align-items: stretch; }
       .mock-sidebar { display: none; }
       .mock-body { grid-template-columns: 1fr; }
       .mock-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-title { letter-spacing: -2px; }
       .hero-card-wrap { margin-top: -16px; }
       .hero-footer { margin-top: 380px; text-align: center; }
-      .hero-btns { justify-content: center; }
+      .hero-btns { justify-content: center; flex-direction: column; align-items: center; gap: 12px; }
+      .hero-btns a { width: 100%; max-width: 320px; text-align: center; }
+      /* Marquee em fluxo normal no mobile — não absoluto */
+      .marquee-section { position: relative !important; bottom: auto !important; left: auto !important; right: auto !important; width: 100%; margin-top: 60px; padding: 40px 0; }
       .marquee-layout { grid-template-columns: 1fr; }
       .marquee-copy { padding: 0 20px 32px; text-align: center; }
       .marquee-copy h2 { font-size: clamp(24px, 6vw, 32px); }
