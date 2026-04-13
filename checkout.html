@@ -600,9 +600,23 @@
       if (metodoPagamento === 'PIX' && data.pix) {
         document.getElementById('bloco-pix').style.display = 'block';
         document.getElementById('numero-pedido-pix').textContent = `Pedido: ${data.numero}`;
-        document.getElementById('pix-qr').src = `data:image/png;base64,${data.pix.qrCode}`;
-        document.getElementById('pix-payload').textContent = data.pix.payload;
-        window._pixPayload = data.pix.payload;
+        if (data.pix.qrCode) {
+          document.getElementById('pix-qr').src = `data:image/png;base64,${data.pix.qrCode}`;
+          document.getElementById('pix-payload').textContent = data.pix.payload;
+          window._pixPayload = data.pix.payload;
+        } else if (data.pix.invoiceUrl) {
+          // Fallback: Pix via link da fatura
+          document.getElementById('pix-qr').style.display = 'none';
+          document.getElementById('pix-payload').textContent = '';
+          const blocoEl = document.getElementById('bloco-pix');
+          const linkEl = document.createElement('a');
+          linkEl.href = data.pix.invoiceUrl;
+          linkEl.target = '_blank';
+          linkEl.className = 'btn-confirmar';
+          linkEl.style.cssText = 'display:block;text-align:center;margin-top:16px;';
+          linkEl.textContent = '🔗 Pagar via link seguro Asaas';
+          blocoEl.appendChild(linkEl);
+        }
       } else if (metodoPagamento === 'BOLETO' && data.boleto) {
         document.getElementById('bloco-boleto').style.display = 'block';
         document.getElementById('numero-pedido-boleto').textContent = `Pedido: ${data.numero}`;

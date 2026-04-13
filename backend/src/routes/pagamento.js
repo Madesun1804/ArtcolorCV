@@ -90,8 +90,14 @@ router.post('/criar', authMiddleware, async (req, res) => {
     const resposta = { numero, pedidoId, total, metodo, pagamentoId: cobranca.id };
 
     if (metodo === 'PIX') {
-      const pix = await obterPixQrCode(cobranca.id);
-      resposta.pix = { qrCode: pix.encodedImage, payload: pix.payload, expiracao: pix.expirationDate };
+      try {
+        const pix = await obterPixQrCode(cobranca.id);
+        resposta.pix = { qrCode: pix.encodedImage, payload: pix.payload, expiracao: pix.expirationDate };
+      } catch (pixErr) {
+        console.warn('[Pagamento] QR Code Pix indisponível:', pixErr.response?.data || pixErr.message);
+        // Fallback: envia link da fatura para o cliente pagar
+        resposta.pix = { invoiceUrl: cobranca.invoiceUrl };
+      }
     } else if (metodo === 'BOLETO') {
       resposta.boleto = { url: cobranca.bankSlipUrl, linha: cobranca.nossoNumero };
     } else if (metodo === 'CREDIT_CARD') {
