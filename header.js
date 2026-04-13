@@ -208,6 +208,7 @@
         <a href="index.html#portfolio" onclick="closeMenu()">Portfólio</a>
         <a href="index.html#contato" onclick="closeMenu()">Contato</a>
         <a href="produtos.html" onclick="closeMenu()" ${isProdutos ? 'class="active"' : ''}>Produtos</a>
+        <a href="${contaHref}" onclick="closeMenu()" style="${_token ? 'color:#FFC300' : ''}">${contaTitle}</a>
       </div>
     </header>
   `;

@@ -219,6 +219,17 @@ function seedIfEmpty(db) {
     '["banner","lona","impressão","publicidade"]'
   );
 
+  insertProd.run(
+    'Adesivo Personalizado (Teste)',
+    'adesivo-personalizado-teste',
+    'Adesivo em vinil recortado personalizado com seu logotipo ou arte. Produto de demonstração para testes da loja.',
+    'Adesivo personalizado em vinil — produto de demonstração.',
+    1.00, null, 5,
+    'https://madesun1804.github.io/ArtcolorCV/assets/fachada-acm.png',
+    999, 0,
+    '["adesivo","vinil","personalizado","teste"]'
+  );
+
   // Admin padrão
   const bcrypt = require('bcryptjs');
   const senhaHash = bcrypt.hashSync('artcolor2026', 10);
