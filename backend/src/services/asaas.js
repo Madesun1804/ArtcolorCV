@@ -1,8 +1,15 @@
 const axios = require('axios');
 
-const BASE_URL = process.env.ASAAS_SANDBOX === 'false'
-  ? 'https://api.asaas.com/v3'
-  : 'https://sandbox.asaas.com/api/v3';
+// Proteção: só vai para produção se ASAAS_SANDBOX for explicitamente 'false'
+// E a chave de produção NÃO contém '_hmlg_'
+const isSandbox = process.env.ASAAS_SANDBOX !== 'false'
+  || (process.env.ASAAS_API_KEY || '').includes('_hmlg_');
+
+const BASE_URL = isSandbox
+  ? 'https://sandbox.asaas.com/api/v3'
+  : 'https://api.asaas.com/v3';
+
+if (isSandbox) console.log('[Asaas] Modo SANDBOX ativo.');
 
 const api = axios.create({
   baseURL: BASE_URL,
