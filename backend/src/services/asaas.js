@@ -23,7 +23,21 @@ async function obterOuCriarCliente({ nome, email, cpfCnpj, telefone }) {
     const busca = await api.get('/customers', { params: { cpfCnpj } });
     if (busca.data.totalCount > 0) return busca.data.data[0];
   }
-  const { data } = await api.post('/customers', { name: nome, email, cpfCnpj, phone: telefone });
+  const payload = { name: nome, email, cpfCnpj };
+  // Tenta criar com telefone; se inválido, Asaas retorna erro e tentamos sem
+  if (telefone) {
+    const fone = telefone.replace(/\D/g, '');
+    if (fone.length >= 10) payload.mobilePhone = fone;
+  }
+  let data;
+  try {
+    ({ data } = await api.post('/customers', payload));
+  } catch (e) {
+    if (e.response?.data?.errors?.some(err => /phone/i.test(err.code || ''))) {
+      delete payload.mobilePhone;
+      ({ data } = await api.post('/customers', payload));
+    } else throw e;
+  }
   return data;
 }
 
